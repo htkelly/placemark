@@ -1,0 +1,30 @@
+<table class="table is-fullwidth">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each category.places}}
+        <tr>
+            <td>
+                {{name}}
+            </td>
+            <td>
+                {{description}}
+            </td>
+            <td>
+                {{location.latitude}},{{location.longitude}}
+            </td>
+            <td>
+                <a href="/category/{{../category._id}}/deleteplace/{{_id}}" class="ui icon button">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
