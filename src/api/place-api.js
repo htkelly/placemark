@@ -7,6 +7,7 @@ export const placeApi = {
   find: {
     auth: {
       strategy: "jwt",
+      scope: "user",
     },
     handler: async function (request, h) {
       try {
@@ -25,6 +26,7 @@ export const placeApi = {
   findOne: {
     auth: {
       strategy: "jwt",
+      scope: "user",
     },
     async handler(request) {
       try {
@@ -47,6 +49,7 @@ export const placeApi = {
   create: {
     auth: {
       strategy: "jwt",
+      scope: "user",
     },
     handler: async function (request, h) {
       try {
@@ -69,6 +72,7 @@ export const placeApi = {
   deleteAll: {
     auth: {
       strategy: "jwt",
+      scope: "user",
     },
     handler: async function (request, h) {
       try {
@@ -85,6 +89,7 @@ export const placeApi = {
   deleteOne: {
     auth: {
       strategy: "jwt",
+      scope: "user",
     },
     handler: async function (request, h) {
       try {

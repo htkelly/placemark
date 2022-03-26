@@ -13,7 +13,7 @@ import { validate } from "./api/jwt-utils.js";
 import { webRoutes } from "./web-routes.js";
 import { apiRoutes } from "./api-routes.js";
 import { db } from "./models/db.js";
-
+import helpers from "./views/helpers/helpers.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 
 const swaggerOptions = {
@@ -63,6 +63,7 @@ async function init() {
     path: "./views",
     layoutPath: "./views/layouts",
     partialsPath: "./views/partials",
+    helpersPath: "./views/helpers",
     layout: true,
     isCached: false,
   });
@@ -85,6 +86,7 @@ async function init() {
   db.init("mongo");
   server.route(webRoutes);
   server.route(apiRoutes);
+  helpers(Handlebars);
   await server.start();
   console.log("Server running on %s", server.info.uri);
 }

@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { placemarkService } from "./placemark-service.js";
-import { maggie, maggieCredentials, testUsers } from "../fixtures.js";
+import { maggie, maggieCredentials, lisa, lisaCredentials, testUsers } from "../fixtures.js";
 
 const users = new Array(testUsers.length);
 
@@ -61,6 +61,19 @@ suite("User API tests", () => {
     } catch (error) {
       assert(error.response.data.message === "No User with this id");
       assert.equal(error.response.data.statusCode, 404);
+    }
+  });
+
+  test("sensitive user api routes forbidden to non-admins", async () => {
+    await placemarkService.clearAuth();
+    await placemarkService.createUser(lisa);
+    await placemarkService.authenticate(lisaCredentials);
+    try {
+      await placemarkService.deleteAllUsers();
+      assert.fail("Should not be allowed");
+    } catch (error) {
+      assert(error.response.data.message === "Insufficient scope");
+      assert.equal(error.response.data.statusCode, 403);
     }
   });
 });
