@@ -32,6 +32,7 @@ export const userApi = {
   find: {
     auth: {
       strategy: "jwt",
+      scope: "admin",
     },
     handler: async function (request, h) {
       try {
@@ -42,14 +43,15 @@ export const userApi = {
       }
     },
     tags: ["api"],
-    description: "Get all userApi",
-    notes: "Returns details of all userApi",
+    description: "Get all users",
+    notes: "Returns details of all users",
     response: { schema: UserArray, failAction: validationError },
   },
 
   findOne: {
     auth: {
       strategy: "jwt",
+      scope: "admin",
     },
     handler: async function (request, h) {
       try {
@@ -92,6 +94,7 @@ export const userApi = {
   deleteAll: {
     auth: {
       strategy: "jwt",
+      scope: "admin",
     },
     handler: async function (request, h) {
       try {
@@ -102,7 +105,7 @@ export const userApi = {
       }
     },
     tags: ["api"],
-    description: "Delete all userApi",
-    notes: "All userApi removed from Playtime",
+    description: "Delete all users",
+    notes: "Delete all users",
   },
 };

@@ -4,10 +4,12 @@ import { PlaceFormInputSpec, PlaceSpec } from "../models/joi-schemas.js";
 export const categoryController = {
   index: {
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
       const category = await db.categoryStore.getCategoryById(request.params.id);
       const viewData = {
         title: category.name,
         category: category,
+        user: loggedInUser,
       };
       return h.view("category-view", viewData);
     },

@@ -1,4 +1,8 @@
-{{> menu}}
+{{#if (isAdmin user) }}
+    {{> admin-menu }}
+{{else}}
+    {{> menu }}
+{{/if}}
 
 <section class="section">
     <div class="title">

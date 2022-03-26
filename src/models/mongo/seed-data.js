@@ -6,6 +6,7 @@ export const seedData = {
       lastName: "Simpson",
       email: "homer@simpson.com",
       password: "secret",
+      scope: ["admin", "user"],
     },
     marge: {
       firstName: "Marge",

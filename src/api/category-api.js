@@ -8,6 +8,7 @@ export const categoryApi = {
   find: {
     auth: {
       strategy: "jwt",
+      scope: "user",
     },
     handler: async function (request, h) {
       try {
@@ -26,6 +27,7 @@ export const categoryApi = {
   findOne: {
     auth: {
       strategy: "jwt",
+      scope: "user",
     },
     async handler(request) {
       try {
@@ -48,6 +50,7 @@ export const categoryApi = {
   create: {
     auth: {
       strategy: "jwt",
+      scope: "user",
     },
     handler: async function (request, h) {
       try {
@@ -71,6 +74,7 @@ export const categoryApi = {
   deleteOne: {
     auth: {
       strategy: "jwt",
+      scope: "user",
     },
     handler: async function (request, h) {
       try {
@@ -92,6 +96,7 @@ export const categoryApi = {
   deleteAll: {
     auth: {
       strategy: "jwt",
+      scope: "user",
     },
     handler: async function (request, h) {
       try {
