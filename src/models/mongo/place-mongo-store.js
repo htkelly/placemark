@@ -38,11 +38,14 @@ export const placeMongoStore = {
     await Place.deleteMany({});
   },
 
-  async updatePlace(place, updatedPlace) {
+  async updatePlace(updatedPlace) {
+    const place = await Place.findOne({ _id: updatedPlace._id });
     place.name = updatedPlace.name;
     place.description = updatedPlace.description;
+    place.img = updatedPlace.img;
     place.location.latitude = updatedPlace.location.latitude;
     place.location.longitude = updatedPlace.location.longitude;
     await place.save();
+    return Place.findOne({ _id: updatedPlace._id });
   },
 };
