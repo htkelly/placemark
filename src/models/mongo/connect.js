@@ -28,6 +28,6 @@ export function connectMongo() {
   db.once("open", function () {
     console.log(`database connected to ${this.name} on ${this.host}`);
     // uncomment the below line to seed the database for testing, but beware this may cause unpredictable test behaviour
-    // seed();
+    seed();
   });
 }
