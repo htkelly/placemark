@@ -31,21 +31,21 @@ const swaggerOptions = {
   security: [{ jwt: [] }],
 };
 
-/*
 const result = dotenv.config();
 if (result.error) {
   console.log(result.error.message);
   process.exit(1);
 }
-*/
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function init() {
   const server = Hapi.server({
-    port: process.env.PORT || 3000,
+    port: 3000,
+    host: "localhost",
   });
+
   await server.register([
     Inert,
     Vision,
@@ -84,7 +84,7 @@ async function init() {
     verifyOptions: { algorithms: ["HS256"] },
   });
   server.auth.default("session");
-  db.init("mongo");
+  db.init("firebase");
   server.route(webRoutes);
   server.route(apiRoutes);
   helpers(Handlebars);

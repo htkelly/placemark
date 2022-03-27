@@ -8,6 +8,7 @@ import { connectMongo } from "./mongo/connect.js";
 import { userMongoStore } from "./mongo/user-mongo-store.js";
 import { categoryMongoStore } from "./mongo/category-mongo-store.js";
 import { placeMongoStore } from "./mongo/place-mongo-store.js";
+import { userFirebaseStore } from "./firebase/user-firebase-store.js";
 
 export const db = {
   userStore: null,
@@ -26,6 +27,9 @@ export const db = {
         this.categoryStore = categoryMongoStore;
         this.placeStore = placeMongoStore;
         connectMongo();
+        break;
+      case "firebase":
+        this.userStore = userFirebaseStore;
         break;
       default:
         this.userStore = userMemStore;
