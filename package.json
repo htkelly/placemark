@@ -1,6 +1,6 @@
 {
   "name": "placemark",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "PlaceMark: an app for tracking points of interest",
   "main": "server.js",
   "type": "module",
