@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, push, ref, set } from "firebase/database";
+import { getDatabase } from "firebase/database";
 
 // Initialize Firebase
 const app = initializeApp({
