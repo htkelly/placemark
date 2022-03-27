@@ -52,6 +52,15 @@ suite("Place Model tests", () => {
     assert.isNull(deletedPlace);
   });
 
+  test("update one place with image", async () => {
+    const imageUrl = "images/testimage.jpg";
+    const barsList = await db.categoryStore.addCategory(bars);
+    const place = await db.placeStore.addPlace(barsList._id, cleeres);
+    place.img = imageUrl;
+    const updatedPlace = await db.placeStore.updatePlace(place);
+    assert.equal(updatedPlace.img, imageUrl);
+  });
+
   test("get a place - bad params", async () => {
     assert.isNull(await db.placeStore.getPlaceById(""));
     assert.isNull(await db.placeStore.getPlaceById());

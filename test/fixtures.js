@@ -53,6 +53,7 @@ export const bars = {
 export const cleeres = {
   name: "Cleeres Bar",
   description: "Traditional bar and venue.",
+  img: "/images/default.jpg",
   location: {
     latitude: 52.65525575610583,
     longitude: -7.255150587871992,
@@ -66,6 +67,7 @@ export const kilkenny = {
 export const notaplace = {
   name: "Nowhere",
   description: "A place with impossible coordinates.",
+  img: "/images/default.jpg",
   location: {
     latitude: 91,
     longitude: 181,
@@ -88,6 +90,7 @@ export const testPlaces = [
   {
     name: "Butler Gallery",
     description: "The South East of Ireland's leading Art Gallery and Museum.",
+    img: "/images/default.jpg",
     location: {
       latitude: 52.65388415437535,
       longitude: -7.249640926982695,
@@ -96,6 +99,7 @@ export const testPlaces = [
   {
     name: "Medieval Mile Museum",
     description: "Museum in a 13th-century church & graveyard featuring medieval sculpture & Renaissance-era tombs.",
+    img: "/images/default.jpg",
     location: {
       latitude: 52.65191757842845,
       longitude: -7.252191371163784,
@@ -104,6 +108,7 @@ export const testPlaces = [
   {
     name: "Rothe House & Garden",
     description: "Heritage museum situated in a late 16th-century merchant's townhouse.",
+    img: "/images/default.jpg",
     location: {
       latitude: 52.654829215111974,
       longitude: -7.254521711637829,

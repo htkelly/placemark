@@ -1,7 +1,5 @@
 const helpers = (hbs) => {
-  hbs.registerHelper("isAdmin", (user) => {
-    return !!user.scope.includes("admin");
-  });
+  hbs.registerHelper("isAdmin", (user) => !!user.scope.includes("admin"));
 };
 
 export default helpers;

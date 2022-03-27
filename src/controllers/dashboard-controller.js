@@ -22,7 +22,7 @@ export const dashboardController = {
       failAction: async function (request, h, error) {
         const loggedInUser = request.auth.credentials;
         const categories = await db.categoryStore.getUserCategories(loggedInUser._id);
-        return h.view("dashboard-view", { title: "Add Category error", categories: categories, errors: error.details }).takeover().code(400);
+        return h.view("dashboard-view", { title: "Add Category error", categories: categories, user: loggedInUser, errors: error.details }).takeover().code(400);
       },
     },
     handler: async function (request, h) {

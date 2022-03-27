@@ -33,6 +33,7 @@ export const PlaceSpec = Joi.object()
   .keys({
     name: Joi.string().required().example("Kilkenny Castle"),
     description: Joi.string().required().example("13th century Norman castle"),
+    img: Joi.string().required().example("./public/images/default.jpg"),
     location: Joi.object().keys({
       latitude: Joi.number().min(-90).max(90).required(),
       longitude: Joi.number().min(-180).max(180).required(),
