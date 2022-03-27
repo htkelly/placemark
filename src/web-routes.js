@@ -20,6 +20,7 @@ export const webRoutes = [
   { method: "POST", path: "/category/{id}/addplace", config: categoryController.addPlace },
 
   { method: "GET", path: "/dashboard/deletecategory/{id}", config: dashboardController.deleteCategory },
+  { method: "POST", path: "/category/{id}/uploadimage/{placeid}", config: categoryController.uploadImage },
   { method: "GET", path: "/category/{id}/deleteplace/{placeid}", config: categoryController.deletePlace },
 
   { method: "GET", path: "/admin", config: adminController.index },

@@ -1,30 +1,70 @@
-<table class="table is-fullwidth">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Location</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    {{#each category.places}}
-        <tr>
-            <td>
-                {{name}}
-            </td>
-            <td>
-                {{description}}
-            </td>
-            <td>
-                {{location.latitude}},{{location.longitude}}
-            </td>
-            <td>
-                <a href="/category/{{../category._id}}/deleteplace/{{_id}}" class="ui icon button">
-                    <i class="fas fa-trash"></i>
-                </a>
-            </td>
-        </tr>
-    {{/each}}
-    </tbody>
-</table>
+<div class="container">
+    <div class="columns is-multiline">
+        {{#each category.places}}
+            <div class="column is-one-quarter">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                            {{name}}
+                        </p>
+                    </header>
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src={{img}}>
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            {{description}}
+                        </div>
+                        <div class="content">
+                            {{location.latitude}} , {{location.longitude}}
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a onclick="openUpload('{{_id}}')" class="card-footer-item">
+                            <i class="fas fa-image"></i>
+                        </a>
+                        <a href="/category/{{../category._id}}/deleteplace/{{_id}}" class="card-footer-item">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </footer>
+                </div>
+            </div>
+            <div class="modal" id="upload-{{_id}}">
+                <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="box is-white">
+                            <form action="/category/{{../category._id}}/uploadimage/{{_id}}" method="POST" enctype="multipart/form-data">
+                                <div id="file-select" class="file has-name is-fullwidth">
+                                    <label class="file-label">
+                                        <input class="file-input"  id="file-input-{{_id}}" name="imagefile" type="file" name="resume" accept="image/png, image/jpeg">
+                                        <span class="file-cta">
+                                            <span class="file-icon">
+                                               <i class="fas fa-upload"></i>
+                                            </span>
+                                            <span class="file-label">
+                                                Choose a file…
+                                            </span>
+                                        </span>
+                                        <span class="file-name" id="file-name-{{_id}}"></span>
+                                    </label>
+                                    <button type="submit" class="button is-info">Upload</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                <button class="modal-close is-large" onclick="closeUpload('{{_id}}')"></button>
+            </div>
+            <script>
+                const fileInput{{_id}} = document.getElementById("file-input-{{_id}}")
+                fileInput{{_id}}.onchange = () => {
+                    if (fileInput{{_id}}.files.length > 0) {
+                        const fileName{{_id}} = document.getElementById("file-name-{{_id}}");
+                        fileName{{_id}}.textContent = fileInput{{_id}}.files[0].name;
+                    }
+                };
+            </script>
+        {{/each}}
+    </div>
+</div>
