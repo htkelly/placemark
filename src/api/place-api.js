@@ -1,7 +1,8 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
-import { IdSpec, PlaceSpec, PlaceSpecPlus, PlaceArraySpec } from "../models/joi-schemas.js";
+import { IdSpec, PlaceSpec, PlaceSpecPlus, PlaceArraySpec, PlaceResponseSpec, PlaceResponseArraySpec } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
+import {weatherService} from "../services/weather-service.js";
 
 export const placeApi = {
   find: {
@@ -12,13 +13,18 @@ export const placeApi = {
     handler: async function (request, h) {
       try {
         const places = await db.placeStore.getAllPlaces();
+        for (const place of places) {
+          const weatherDetails = await weatherService.weatherRequest(place.location.latitude, place.location.longitude);
+          place.weatherDescription = weatherDetails.description;
+          place.temperature = weatherDetails.temperature;
+        }
         return places;
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
       }
     },
     tags: ["api"],
-    response: { schema: PlaceArraySpec, failAction: validationError },
+    response: { schema: PlaceResponseArraySpec, failAction: validationError },
     description: "Get all places",
     notes: "Returns all places",
   },
@@ -34,6 +40,9 @@ export const placeApi = {
         if (!place) {
           return Boom.notFound("No place with this id");
         }
+        const weatherDetails = await weatherService.weatherRequest(place.location.latitude, place.location.longitude);
+        place.weatherDescription = weatherDetails.description;
+        place.temperature = weatherDetails.temperature;
         return place;
       } catch (err) {
         return Boom.serverUnavailable("No place with this id");
@@ -43,7 +52,7 @@ export const placeApi = {
     description: "Find place",
     notes: "Returns one place",
     validate: { params: { id: IdSpec }, failAction: validationError },
-    response: { schema: PlaceSpecPlus, failAction: validationError },
+    response: { schema: PlaceResponseSpec, failAction: validationError },
   },
 
   create: {

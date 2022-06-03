@@ -47,7 +47,14 @@ export const PlaceSpecPlus = PlaceSpec.keys({
   __v: Joi.number(),
 }).label("PlacePlus");
 
+export const PlaceResponseSpec = PlaceSpecPlus.keys({
+    weatherDescription: Joi.string(),
+    temperature: Joi.number(),
+}).label("PlaceResponse");
+
 export const PlaceArraySpec = Joi.array().items(PlaceSpecPlus).label("PlaceArray");
+
+export const PlaceResponseArraySpec = Joi.array().items(PlaceResponseSpec).label("PlaceResponseArray");
 
 export const CategorySpec = Joi.object()
   .keys({
