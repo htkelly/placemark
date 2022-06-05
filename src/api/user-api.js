@@ -1,8 +1,11 @@
 import Boom from "@hapi/boom";
+import bcrypt from "bcrypt";
 import { createToken } from "./jwt-utils.js";
 import { db } from "../models/db.js";
 import { UserSpec, UserCredentialsSpec, UserSpecPlus, IdSpec, UserArray, JwtAuth } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
+
+const saltRounds = 10;
 
 export const userApi = {
   authenticate: {
@@ -13,7 +16,8 @@ export const userApi = {
         if (!user) {
           return Boom.unauthorized("User not found");
         }
-        if (user.password !== request.payload.password) {
+        const passwordsMatch = await bcrypt.compare(request.payload.password, user.password);
+        if (!passwordsMatch) {
           return Boom.unauthorized("Invalid password");
         }
         const token = createToken(user);
@@ -75,8 +79,10 @@ export const userApi = {
     auth: false,
     handler: async function (request, h) {
       try {
-        const user = await db.userStore.addUser(request.payload);
-        if (user) {
+        const user = request.payload;
+        user.password = await bcrypt.hash(user.password, saltRounds);
+        const addedUser = await db.userStore.addUser(user);
+        if (addedUser) {
           return h.response(user).code(201);
         }
         return Boom.badImplementation("error creating user");

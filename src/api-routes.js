@@ -15,6 +15,8 @@ export const apiRoutes = [
   { method: "DELETE", path: "/api/categories/{id}", config: categoryApi.deleteOne },
   { method: "GET", path: "/api/places", config: placeApi.find },
   { method: "GET", path: "/api/places/{id}", config: placeApi.findOne },
+  { method: "POST", path: "/api/places/{id}/images", config: placeApi.addImage },
+  { method: "DELETE", path: "/api/places/{id}/images/{imageid}", config: placeApi.deleteImage },
   { method: "POST", path: "/api/categories/{id}/places", config: placeApi.create },
   { method: "DELETE", path: "/api/places", config: placeApi.deleteAll },
   { method: "DELETE", path: "/api/places/{id}", config: placeApi.deleteOne },

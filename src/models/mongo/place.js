@@ -5,7 +5,7 @@ const { Schema } = Mongoose;
 const placeSchema = new Schema({
   name: String,
   description: String,
-  img: { type: String, default: "/images/default.jpg" },
+  img: [Object],
   location: {
     latitude: Number,
     longitude: Number,

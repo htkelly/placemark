@@ -33,7 +33,7 @@ export const PlaceSpec = Joi.object()
   .keys({
     name: Joi.string().required().example("Kilkenny Castle"),
     description: Joi.string().required().example("13th century Norman castle"),
-    img: Joi.string().required().example("./public/images/default.jpg"),
+    img: Joi.array().items(Joi.object()).required().example("[]"),
     location: Joi.object().keys({
       latitude: Joi.number().min(-90).max(90).required(),
       longitude: Joi.number().min(-180).max(180).required(),
@@ -47,7 +47,16 @@ export const PlaceSpecPlus = PlaceSpec.keys({
   __v: Joi.number(),
 }).label("PlacePlus");
 
+export const PlaceResponseSpec = PlaceSpecPlus.keys({
+    weatherDescription: Joi.string(),
+    temperature: Joi.number(),
+    tomorrowDayTemp: Joi.number(),
+    nextdayDayTemp: Joi.number(),
+}).label("PlaceResponse");
+
 export const PlaceArraySpec = Joi.array().items(PlaceSpecPlus).label("PlaceArray");
+
+export const PlaceResponseArraySpec = Joi.array().items(PlaceResponseSpec).label("PlaceResponseArray");
 
 export const CategorySpec = Joi.object()
   .keys({
