@@ -31,13 +31,13 @@ const swaggerOptions = {
   security: [{ jwt: [] }],
 };
 
-/*
+
 const result = dotenv.config();
 if (result.error) {
   console.log(result.error.message);
-  process.exit(1);
+  // process.exit(1);
 }
-*/
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -45,6 +45,7 @@ const __dirname = path.dirname(__filename);
 async function init() {
   const server = Hapi.server({
     port: process.env.PORT || 3000,
+    routes: { cors: true },
   });
   await server.register([
     Inert,
